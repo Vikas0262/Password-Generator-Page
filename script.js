@@ -1,5 +1,5 @@
 const resultElement = document.getElementById('result');
-const lengthElement = document.getElementById('result');
+const lengthElement = document.getElementById('length'); // Corrected
 const upperCaseElement = document.getElementById('uppercase');
 const lowerCaseElement = document.getElementById('lowercase');
 const numbersElement = document.getElementById('numbers');
@@ -29,7 +29,7 @@ generateElement.addEventListener('click', () => {
     const hasNumber = numbersElement.checked;
     const hasSymbol = symbolsElement.checked;
 
-    resultElement.innerText = generatePassword(hasLower, hasUpper)
+    resultElement.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
 })
 
 function generatePassword(lower, upper, number, symbol, length) {
@@ -42,15 +42,13 @@ function generatePassword(lower, upper, number, symbol, length) {
     for (let i = 0; i < length; i += typesCount) {
         typesArr.forEach(type => {
             const funcName = Object.keys(type)[0]
-            generatePassword += randomFunction[funcName]()
+            generatedPassword += randomFunction[funcName]()
         })
     }
 
     const finalPassword = generatedPassword.slice(0,length)
     return finalPassword;
 }
-
-
 
 function getRandomLower() {
     return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
@@ -68,4 +66,3 @@ function getRandomSymbol() {
     const symbols = '!@#$%^&*(){}[]=<>/,.'
     return symbols[Math.floor(Math.random() * symbols.length)]
 }
-
